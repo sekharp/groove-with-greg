@@ -1,7 +1,7 @@
 10.times do |r|
   Record.create(
-    artist: Faker::Hipster.word,
-    title: Faker::Hipster.sentence.truncate(30),
+    artist: Faker::Hipster.word.capitalize,
+    title: Faker::Hipster.words(4).map(&:capitalize).join(' '),
     year: rand(1958..2018),
     condition: 1
   )
