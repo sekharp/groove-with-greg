@@ -10,4 +10,16 @@ class RecordsController < ApiController
 		@record = Record.find(params[:id])
 		render json: @record.to_json
 	end
+
+	# POST /records
+	def create
+		record = Record.new(record_params)
+
+    if record.save
+      render json: record, status: :created
+    else
+      render json: record,
+						 status: :unprocessable_entity
+		end
+	end
 end
