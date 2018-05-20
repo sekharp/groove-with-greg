@@ -19,3 +19,8 @@ body {
   border-radius: 10px;
   border: 1px black solid;
 }
+
+.table-condition-dropdown .ui .selection .dropdown {
+  width: 80px;
+  min-width: 80px;
+}

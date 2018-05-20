@@ -7,7 +7,8 @@ import {
   Loader,
   Divider,
   Form,
-  Select
+  Select,
+  Field
 } from "semantic-ui-react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { HorizontalBar } from "react-chartjs-2";
@@ -103,15 +104,13 @@ class Home extends Component {
   render() {
     let { records, title, artist, year, condition } = this.state;
 
-    // Form Variables
-    const dropdownOptions = [
+    const conditionDropdownOptions = [
       { key: "m", text: "Mint", value: "mint" },
       { key: "g", text: "Good", value: "good" },
       { key: "a", text: "Acceptable", value: "acceptable" },
       { key: "b", text: "Bad", value: "bad" }
     ];
 
-    // Chart.js Variables
     const barChartData = {
       labels: keys(groupBy(records, "year")),
       datasets: [
@@ -165,7 +164,7 @@ class Home extends Component {
               control={Select}
               name="condition"
               label="Condition"
-              options={dropdownOptions}
+              options={conditionDropdownOptions}
               placeholder="Mint"
               value={condition}
               onChange={this.handleChange}
@@ -219,6 +218,10 @@ class Home extends Component {
                 dataSort
                 width="120"
                 dataFormat={this.formatCondition}
+                editable={{
+                  type: "select",
+                  options: { values: ["mint", "good", "acceptable", "bad"] }
+                }}
               >
                 Condition
               </TableHeaderColumn>

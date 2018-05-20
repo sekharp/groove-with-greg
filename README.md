@@ -1,8 +1,6 @@
 # Groove with Greg
 
-This repo is a basic CRUD app for maintaining a record collection.
-
-![A screenshot of the app in action](https://i.imgur.com/FDpAEtO.mp4)
+This repo contains a basic CRUD app for maintaining a record collection.
 
 Features include:
 
@@ -13,6 +11,8 @@ Features include:
 * Change table page size
 * Sort table columns for records by ID, title, artist, year and condition
 * View records by number per year in horizontal bar chart
+
+![A screenshot of the app in action](https://i.imgur.com/FDpAEtO.gif)
 
 ## Boilerplate Code
 
