@@ -31,9 +31,21 @@ class RecordsController < ApiController
     render json: record, status: :ok
 	end
 
+	# PATCH /records/:id
+	def update
+		record = Record.find(params[:id])
+
+		if record.update(record_params)
+      render json: record, status: :ok
+    else
+      render json: record,
+             status: :unprocessable_entity
+    end
+  end
+
 	private
 
 	def record_params
-    params.permit(:title, :artist, :year, :condition)
+    params.permit(:id, :title, :artist, :year, :condition)
   end
 end

@@ -55,7 +55,7 @@ class Home extends Component {
       method: "POST",
       body: JSON.stringify(formParams)
     };
-
+    console.log(request);
     window.fetch(`/api/records/`, request).then(() => this.getRecords());
   };
 
@@ -74,6 +74,17 @@ class Home extends Component {
       });
     }
   }
+
+  onAfterSaveCell = formValues => {
+    const request = {
+      method: "PATCH",
+      body: JSON.stringify(formValues)
+    };
+    console.log(request);
+    return window
+      .fetch(`/api/records/${formValues.id}`, request)
+      .then(() => this.getRecords());
+  };
 
   render() {
     let { records, title, artist, year, condition } = this.state;
@@ -146,6 +157,11 @@ class Home extends Component {
             deleteRow
             selectRow={selectRow}
             options={options}
+            cellEdit={{
+              mode: "dbclick",
+              blurToSave: true,
+              afterSaveCell: this.onAfterSaveCell
+            }}
           >
             <TableHeaderColumn
               dataField="id"
