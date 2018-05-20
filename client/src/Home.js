@@ -94,6 +94,10 @@ class Home extends Component {
       .then(() => this.getRecords());
   };
 
+  formatCondition = condition => {
+    return condition.charAt(0).toUpperCase() + condition.slice(1);
+  };
+
   render() {
     let { records, title, artist, year, condition } = this.state;
     const dropdownOptions = [
@@ -191,7 +195,12 @@ class Home extends Component {
               <TableHeaderColumn dataField="year" dataSort width="80">
                 Year
               </TableHeaderColumn>
-              <TableHeaderColumn dataField="condition" dataSort width="120">
+              <TableHeaderColumn
+                dataField="condition"
+                dataSort
+                width="120"
+                dataFormat={this.formatCondition}
+              >
                 Condition
               </TableHeaderColumn>
             </BootstrapTable>
