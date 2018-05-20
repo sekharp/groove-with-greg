@@ -110,7 +110,7 @@ class Home extends Component {
     };
     return records ? (
       <Container text>
-        <Header as="h2" icon textAlign="center" color="red">
+        <Header as="h2" icon textAlign="center">
           <Icon name="sound" circular />
           <Header.Content>Records</Header.Content>
         </Header>
@@ -155,52 +155,54 @@ class Home extends Component {
           />
           <Form.Button type="submit">Submit</Form.Button>
         </Form>
-        <Divider hidden section />
-        <h3>Record Collection</h3>
-        {records && records.length ? (
-          <BootstrapTable
-            data={records}
-            striped={true}
-            hover={true}
-            deleteRow
-            selectRow={selectRow}
-            options={options}
-            cellEdit={{
-              mode: "dbclick",
-              blurToSave: true,
-              afterSaveCell: this.onAfterSaveCell
-            }}
-            search
-          >
-            <TableHeaderColumn
-              dataField="id"
-              isKey={true}
-              dataAlign="center"
-              dataSort
-              width="80"
+        <Divider section />
+        <div className="record-collection">
+          <h3>Record Collection</h3>
+          {records && records.length ? (
+            <BootstrapTable
+              data={records}
+              striped={true}
+              hover={true}
+              deleteRow
+              selectRow={selectRow}
+              options={options}
+              cellEdit={{
+                mode: "dbclick",
+                blurToSave: true,
+                afterSaveCell: this.onAfterSaveCell
+              }}
+              search
             >
-              ID
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="title" dataSort width="300">
-              Title
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="artist" dataSort width="100">
-              Artist
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="year" dataSort width="80">
-              Year
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="condition" dataSort width="100">
-              Condition
-            </TableHeaderColumn>
-          </BootstrapTable>
-        ) : (
-          <Container text>
-            <Dimmer active inverted>
-              <Loader content="Loading" />
-            </Dimmer>
-          </Container>
-        )}
+              <TableHeaderColumn
+                dataField="id"
+                isKey={true}
+                dataAlign="center"
+                dataSort
+                width="80"
+              >
+                ID
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="title" dataSort width="300">
+                Title
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="artist" dataSort width="100">
+                Artist
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="year" dataSort width="80">
+                Year
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField="condition" dataSort width="100">
+                Condition
+              </TableHeaderColumn>
+            </BootstrapTable>
+          ) : (
+            <Container text>
+              <Dimmer active inverted>
+                <Loader content="Loading" />
+              </Dimmer>
+            </Container>
+          )}
+        </div>
       </Container>
     ) : (
       <Container text>

@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: lightyellow;
 }
 
 #root {
@@ -10,4 +11,11 @@ body {
 
 .react-bs-container-header table {
   margin-bottom: 0;
+}
+
+.record-collection {
+  background: white;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px black solid;
 }
