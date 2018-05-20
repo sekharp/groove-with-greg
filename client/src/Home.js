@@ -170,26 +170,35 @@ class Home extends Component {
               blurToSave: true,
               afterSaveCell: this.onAfterSaveCell
             }}
+            search
           >
             <TableHeaderColumn
               dataField="id"
               isKey={true}
               dataAlign="center"
-              dataSort={true}
+              dataSort
             >
               ID
             </TableHeaderColumn>
-            <TableHeaderColumn dataField="title" dataSort={true}>
+            <TableHeaderColumn dataField="title" dataSort>
               Title
             </TableHeaderColumn>
-            <TableHeaderColumn dataField="artist">Artist</TableHeaderColumn>
-            <TableHeaderColumn dataField="year">Year</TableHeaderColumn>
-            <TableHeaderColumn dataField="condition">
+            <TableHeaderColumn dataField="artist" dataSort>
+              Artist
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="year" dataSort>
+              Year
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="condition" dataSort>
               Condition
             </TableHeaderColumn>
           </BootstrapTable>
         ) : (
-          <Container textAlign="center">No records found.</Container>
+          <Container text>
+            <Dimmer active inverted>
+              <Loader content="Loading" />
+            </Dimmer>
+          </Container>
         )}
       </Container>
     ) : (
