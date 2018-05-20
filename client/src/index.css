@@ -7,3 +7,7 @@ body {
 #root {
   padding: 4rem 0;
 }
+
+.react-bs-container-header table {
+  margin-bottom: 0;
+}

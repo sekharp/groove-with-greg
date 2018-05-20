@@ -177,19 +177,20 @@ class Home extends Component {
               isKey={true}
               dataAlign="center"
               dataSort
+              width="80"
             >
               ID
             </TableHeaderColumn>
-            <TableHeaderColumn dataField="title" dataSort>
+            <TableHeaderColumn dataField="title" dataSort width="300">
               Title
             </TableHeaderColumn>
-            <TableHeaderColumn dataField="artist" dataSort>
+            <TableHeaderColumn dataField="artist" dataSort width="100">
               Artist
             </TableHeaderColumn>
-            <TableHeaderColumn dataField="year" dataSort>
+            <TableHeaderColumn dataField="year" dataSort width="80">
               Year
             </TableHeaderColumn>
-            <TableHeaderColumn dataField="condition" dataSort>
+            <TableHeaderColumn dataField="condition" dataSort width="100">
               Condition
             </TableHeaderColumn>
           </BootstrapTable>
