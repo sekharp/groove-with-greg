@@ -15,10 +15,10 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      submittedTitle: "",
-      submittedArtist: "",
-      submittedYear: 1980,
-      submittedCondition: "mint"
+      title: "",
+      artist: "",
+      year: null,
+      condition: null
     };
     this.getRecords = this.getRecords.bind(this);
     this.getRecord = this.getRecord.bind(this);
@@ -54,15 +54,25 @@ class Home extends Component {
   }
 
   createRecord = () => {
-    debugger;
-    this.fetch(`/api/records/`, {
-      method: "post",
-      body: JSON.stringify({})
-    }).then(record => this.setState({ record: record }));
+    const { title, artist, year, condition } = this.state;
+    const formParams = {
+      title: title,
+      artist: artist,
+      year: year,
+      condition: condition
+    };
+    const request = {
+      method: "POST",
+      body: JSON.stringify(formParams)
+    };
+
+    this.fetch(`/api/records/`, request).then(res => console.log(res));
   };
 
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
+
   render() {
-    let { records, record } = this.state;
+    let { records, record, title, artist, year, condition } = this.state;
     const options = [
       { key: "m", text: "Mint", value: "mint" },
       { key: "g", text: "Good", value: "good" },
@@ -80,15 +90,30 @@ class Home extends Component {
           <h3>Add New Record to Collection</h3>
           <Form.Field>
             <label>Record Title</label>
-            <input name="title" placeholder="Actually Seitan Park Listicle" />
+            <Form.Input
+              name="title"
+              placeholder="Actually Seitan Park Listicle"
+              value={title}
+              onChange={this.handleChange}
+            />
           </Form.Field>
           <Form.Field>
             <label>Artist</label>
-            <input name="artist" placeholder="Gentrify" />
+            <Form.Input
+              name="artist"
+              placeholder="Gentrify"
+              value={artist}
+              onChange={this.handleChange}
+            />
           </Form.Field>
           <Form.Field>
             <label>Year</label>
-            <input name="year" placeholder="1977" />
+            <Form.Input
+              name="year"
+              placeholder="1977"
+              value={year}
+              onChange={this.handleChange}
+            />
           </Form.Field>
           <Form.Field
             control={Select}
@@ -96,8 +121,10 @@ class Home extends Component {
             label="Condition"
             options={options}
             placeholder="Mint"
+            value={condition}
+            onChange={this.handleChange}
           />
-          <Button type="submit">Submit</Button>
+          <Form.Button type="submit">Submit</Form.Button>
         </Form>
         <Divider hidden section />
         <h3>Record Collection</h3>

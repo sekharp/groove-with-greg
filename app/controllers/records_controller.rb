@@ -22,4 +22,10 @@ class RecordsController < ApiController
 						 status: :unprocessable_entity
 		end
 	end
+
+	private
+
+	def record_params
+    jsonapi_parse params, only: %i[title artist year condition]
+  end
 end
