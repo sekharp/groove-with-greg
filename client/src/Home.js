@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Container,
   Header,
-  Segment,
   Button,
   Icon,
   Dimmer,
@@ -15,9 +14,15 @@ import {
 class Home extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      submittedTitle: "",
+      submittedArtist: "",
+      submittedYear: 1980,
+      submittedCondition: "mint"
+    };
     this.getRecords = this.getRecords.bind(this);
     this.getRecord = this.getRecord.bind(this);
+    this.createRecord = this.createRecord.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +53,14 @@ class Home extends Component {
     );
   }
 
+  createRecord = () => {
+    debugger;
+    this.fetch(`/api/records/`, {
+      method: "post",
+      body: JSON.stringify({})
+    }).then(record => this.setState({ record: record }));
+  };
+
   render() {
     let { records, record } = this.state;
     const options = [
@@ -58,27 +71,28 @@ class Home extends Component {
     ];
     return records ? (
       <Container text>
-        <Header as="h2" icon textAlign="center" color="teal">
+        <Header as="h2" icon textAlign="center" color="red">
           <Icon name="sound" circular />
           <Header.Content>Records</Header.Content>
         </Header>
         <Divider hidden section />
-        <Form>
+        <Form onSubmit={this.createRecord}>
           <h3>Add New Record to Collection</h3>
           <Form.Field>
             <label>Record Title</label>
-            <input placeholder="Actually Seitan Park Listicle" />
+            <input name="title" placeholder="Actually Seitan Park Listicle" />
           </Form.Field>
           <Form.Field>
-            <label>Album</label>
-            <input placeholder="Gentrify" />
+            <label>Artist</label>
+            <input name="artist" placeholder="Gentrify" />
           </Form.Field>
           <Form.Field>
             <label>Year</label>
-            <input placeholder="1977" />
+            <input name="year" placeholder="1977" />
           </Form.Field>
           <Form.Field
             control={Select}
+            name="condition"
             label="Condition"
             options={options}
             placeholder="Mint"
@@ -90,7 +104,7 @@ class Home extends Component {
         {records && records.length ? (
           Object.keys(records).map(key => {
             return (
-              <div>
+              <div key={key}>
                 <Button
                   active={record && record.id === records[key].id}
                   fluid
@@ -111,7 +125,7 @@ class Home extends Component {
         {record && (
           <Container>
             <Header as="h2">Record: {record.title}</Header>
-            {record.artist && <p>Album: {record.artist}</p>}
+            {record.artist && <p>Artist: {record.artist}</p>}
             {record.year && <p>Year: {record.year}</p>}
             {record.condition && <p>Condition: {record.condition}</p>}
           </Container>
