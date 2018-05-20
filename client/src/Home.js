@@ -174,22 +174,6 @@ class Home extends Component {
           </Form>
         </div>
         <Divider section />
-        <div
-          className="layout-section"
-          style={{ position: "relative", height: "70vh" }}
-        >
-          <HorizontalBar
-            data={barChartData}
-            options={{
-              scales: {
-                xAxes: [{ ticks: { beginAtZero: true, min: 0 } }],
-                yAxes: [{ barThickness: 10 }]
-              },
-              maintainAspectRatio: false
-            }}
-          />
-        </div>
-        <Divider section />
         <div className="layout-section">
           <h3>Record Collection</h3>
           {records && records.length ? (
@@ -239,6 +223,30 @@ class Home extends Component {
                 Condition
               </TableHeaderColumn>
             </BootstrapTable>
+          ) : (
+            <Container text>
+              <Dimmer active inverted>
+                <Loader content="Loading" />
+              </Dimmer>
+            </Container>
+          )}
+        </div>
+        <Divider section />
+        <div
+          className="layout-section"
+          style={{ position: "relative", height: "70vh" }}
+        >
+          {records ? (
+            <HorizontalBar
+              data={barChartData}
+              options={{
+                scales: {
+                  xAxes: [{ ticks: { beginAtZero: true, min: 0 } }],
+                  yAxes: [{ barThickness: 10 }]
+                },
+                maintainAspectRatio: false
+              }}
+            />
           ) : (
             <Container text>
               <Dimmer active inverted>
