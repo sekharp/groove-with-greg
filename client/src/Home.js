@@ -72,7 +72,7 @@ class Home extends Component {
           method: "DELETE"
         };
 
-        window
+        return window
           .fetch(`/api/records/${id}`, request)
           .then(() => this.getRecords());
       });
@@ -182,7 +182,7 @@ class Home extends Component {
               >
                 ID
               </TableHeaderColumn>
-              <TableHeaderColumn dataField="title" dataSort width="300">
+              <TableHeaderColumn dataField="title" dataSort width="280">
                 Title
               </TableHeaderColumn>
               <TableHeaderColumn dataField="artist" dataSort width="100">
@@ -191,7 +191,7 @@ class Home extends Component {
               <TableHeaderColumn dataField="year" dataSort width="80">
                 Year
               </TableHeaderColumn>
-              <TableHeaderColumn dataField="condition" dataSort width="100">
+              <TableHeaderColumn dataField="condition" dataSort width="120">
                 Condition
               </TableHeaderColumn>
             </BootstrapTable>
