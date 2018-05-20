@@ -119,48 +119,50 @@ class Home extends Component {
           <Header.Content>Records</Header.Content>
         </Header>
         <Divider hidden section />
-        <Form onSubmit={this.createRecord}>
-          <h3>Add New Record to Collection</h3>
-          <Form.Field>
-            <label>Record Title</label>
-            <Form.Input
-              name="title"
-              placeholder="Actually Seitan Park Listicle"
-              value={title}
+        <div className="layout-section">
+          <Form onSubmit={this.createRecord}>
+            <h3>Add New Record to Collection</h3>
+            <Form.Field>
+              <label>Record Title</label>
+              <Form.Input
+                name="title"
+                placeholder="Actually Seitan Park Listicle"
+                value={title}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Artist</label>
+              <Form.Input
+                name="artist"
+                placeholder="Gentrify"
+                value={artist}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Year</label>
+              <Form.Input
+                name="year"
+                placeholder="1977"
+                value={year}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field
+              control={Select}
+              name="condition"
+              label="Condition"
+              options={dropdownOptions}
+              placeholder="Mint"
+              value={condition}
               onChange={this.handleChange}
             />
-          </Form.Field>
-          <Form.Field>
-            <label>Artist</label>
-            <Form.Input
-              name="artist"
-              placeholder="Gentrify"
-              value={artist}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Year</label>
-            <Form.Input
-              name="year"
-              placeholder="1977"
-              value={year}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field
-            control={Select}
-            name="condition"
-            label="Condition"
-            options={dropdownOptions}
-            placeholder="Mint"
-            value={condition}
-            onChange={this.handleChange}
-          />
-          <Form.Button type="submit">Submit</Form.Button>
-        </Form>
+            <Form.Button type="submit">Submit</Form.Button>
+          </Form>
+        </div>
         <Divider section />
-        <div className="record-collection">
+        <div className="layout-section">
           <h3>Record Collection</h3>
           {records && records.length ? (
             <BootstrapTable
@@ -212,6 +214,8 @@ class Home extends Component {
             </Container>
           )}
         </div>
+        <Divider section />
+        <div className="layout-section">Placeholder</div>
       </Container>
     ) : (
       <Container text>
