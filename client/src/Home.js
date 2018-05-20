@@ -10,7 +10,8 @@ import {
   Select
 } from "semantic-ui-react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import { Bar } from "react-chartjs-2";
+import { HorizontalBar } from "react-chartjs-2";
+import { capitalize, groupBy, keys, values, map } from "lodash";
 
 class Home extends Component {
   constructor() {
@@ -96,23 +97,41 @@ class Home extends Component {
   };
 
   formatCondition = condition => {
-    return condition.charAt(0).toUpperCase() + condition.slice(1);
+    return capitalize(condition);
   };
 
   render() {
     let { records, title, artist, year, condition } = this.state;
+
+    // Form Variables
     const dropdownOptions = [
       { key: "m", text: "Mint", value: "mint" },
       { key: "g", text: "Good", value: "good" },
       { key: "a", text: "Acceptable", value: "acceptable" },
       { key: "b", text: "Bad", value: "bad" }
     ];
+
+    // React Bootstrap Table Variables
     const selectRow = {
       mode: "checkbox"
     };
     const options = {
       afterDeleteRow: this.handleDeletedRows
     };
+
+    // Chart.js Variables
+    const barChartData = {
+      labels: keys(groupBy(records, "year")),
+      datasets: [
+        {
+          label: "Albums Per Year",
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: map(values(groupBy(records, "year")), group => group.length)
+        }
+      ]
+    };
+
     return records ? (
       <Container text>
         <Header as="h2" icon textAlign="center">
@@ -217,25 +236,10 @@ class Home extends Component {
         </div>
         <Divider section />
         <div className="layout-section">
-          <Bar
-            data={{
-              labels: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July"
-              ],
-              datasets: [
-                {
-                  label: "My First dataset",
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(255, 99, 132)",
-                  data: [0, 10, 5, 2, 20, 30, 45]
-                }
-              ]
+          <HorizontalBar
+            data={barChartData}
+            options={{
+              scales: { xAxes: [{ ticks: { beginAtZero: true, min: 0 } }] }
             }}
           />
         </div>
