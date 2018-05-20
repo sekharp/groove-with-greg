@@ -10,6 +10,7 @@ import {
   Form,
   Select
 } from "semantic-ui-react";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 class Home extends Component {
   constructor() {
@@ -129,33 +130,26 @@ class Home extends Component {
         <Divider hidden section />
         <h3>Record Collection</h3>
         {records && records.length ? (
-          Object.keys(records).map(key => {
-            return (
-              <div key={key}>
-                <Button
-                  active={record && record.id === records[key].id}
-                  fluid
-                  key={key}
-                  onClick={() => this.getRecord(records[key].id)}
-                  color="red"
-                >
-                  {records[key].title}
-                </Button>
-                <br />
-              </div>
-            );
-          })
+          <BootstrapTable data={records} striped={true} hover={true}>
+            <TableHeaderColumn
+              dataField="id"
+              isKey={true}
+              dataAlign="center"
+              dataSort={true}
+            >
+              Product ID
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="title" dataSort={true}>
+              Title
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="artist">Artist</TableHeaderColumn>
+            <TableHeaderColumn dataField="year">Year</TableHeaderColumn>
+            <TableHeaderColumn dataField="condition">
+              Condition
+            </TableHeaderColumn>
+          </BootstrapTable>
         ) : (
           <Container textAlign="center">No records found.</Container>
-        )}
-        <Divider section />
-        {record && (
-          <Container>
-            <Header as="h2">Record: {record.title}</Header>
-            {record.artist && <p>Artist: {record.artist}</p>}
-            {record.year && <p>Year: {record.year}</p>}
-            {record.condition && <p>Condition: {record.condition}</p>}
-          </Container>
         )}
       </Container>
     ) : (
