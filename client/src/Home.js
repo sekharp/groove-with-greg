@@ -53,9 +53,13 @@ class Home extends Component {
     };
     const request = {
       method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(formParams)
     };
-    console.log(request);
+
     window.fetch(`/api/records/`, request).then(() => this.getRecords());
   };
 
@@ -78,9 +82,13 @@ class Home extends Component {
   onAfterSaveCell = formValues => {
     const request = {
       method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(formValues)
     };
-    console.log(request);
+
     return window
       .fetch(`/api/records/${formValues.id}`, request)
       .then(() => this.getRecords());
