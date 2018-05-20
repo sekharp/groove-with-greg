@@ -11,6 +11,8 @@
     "heroku-postbuild": "yarn build && yarn deploy"
   },
   "dependencies": {
-    "react-bootstrap-table": "^4.3.1"
+    "chart.js": "^2.7.2",
+    "react-bootstrap-table": "^4.3.1",
+    "react-chartjs-2": "^2.7.2"
   }
 }
