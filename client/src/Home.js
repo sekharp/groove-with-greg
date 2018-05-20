@@ -111,14 +111,6 @@ class Home extends Component {
       { key: "b", text: "Bad", value: "bad" }
     ];
 
-    // React Bootstrap Table Variables
-    const selectRow = {
-      mode: "checkbox"
-    };
-    const options = {
-      afterDeleteRow: this.handleDeletedRows
-    };
-
     // Chart.js Variables
     const barChartData = {
       labels: keys(groupBy(records, "year")),
@@ -206,14 +198,19 @@ class Home extends Component {
               striped={true}
               hover={true}
               deleteRow
-              selectRow={selectRow}
-              options={options}
+              selectRow={{
+                mode: "radio"
+              }}
+              options={{
+                afterDeleteRow: this.handleDeletedRows
+              }}
               cellEdit={{
                 mode: "dbclick",
                 blurToSave: true,
                 afterSaveCell: this.onAfterSaveCell
               }}
               search
+              pagination
             >
               <TableHeaderColumn
                 dataField="id"
