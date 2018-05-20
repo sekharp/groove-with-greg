@@ -22,7 +22,6 @@ class Home extends Component {
       condition: null
     };
     this.getRecords = this.getRecords.bind(this);
-    this.getRecord = this.getRecord.bind(this);
     this.createRecord = this.createRecord.bind(this);
   }
 
@@ -30,28 +29,17 @@ class Home extends Component {
     this.getRecords();
   }
 
-  fetch(endpoint) {
-    return window
-      .fetch(endpoint)
-      .then(response => response.json())
-      .catch(error => console.log(error));
-  }
-
   getRecords() {
-    this.fetch("/api/records").then(records => {
-      if (records.length) {
-        this.setState({ records: records });
-        this.getRecord(records[0].id);
-      } else {
-        this.setState({ records: [] });
-      }
-    });
-  }
-
-  getRecord(id) {
-    this.fetch(`/api/records/${id}`).then(record =>
-      this.setState({ record: record })
-    );
+    window
+      .fetch("/api/records")
+      .then(response => response.json())
+      .then(records => {
+        if (records.length) {
+          this.setState({ records: records });
+        } else {
+          this.setState({ records: [] });
+        }
+      });
   }
 
   createRecord = () => {
@@ -64,10 +52,17 @@ class Home extends Component {
     };
     const request = {
       method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(formParams)
     };
 
-    this.fetch(`/api/records/`, request).then(res => console.log(res));
+    window
+      .fetch(`/api/records/`, request)
+      .then(response => response.json())
+      .then(res => console.log(res));
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });

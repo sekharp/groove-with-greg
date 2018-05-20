@@ -26,6 +26,6 @@ class RecordsController < ApiController
 	private
 
 	def record_params
-    jsonapi_parse params, only: %i[title artist year condition]
+    params.permit(:title, :artist, :year, :condition)
   end
 end
