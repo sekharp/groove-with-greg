@@ -23,6 +23,14 @@ class RecordsController < ApiController
 		end
 	end
 
+	# DELETE /records
+	def destroy
+    record = Record.find(params[:id])
+    record.destroy
+
+    render json: record, status: :ok
+	end
+
 	private
 
 	def record_params

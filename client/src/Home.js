@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Container,
   Header,
-  Button,
   Icon,
   Dimmer,
   Loader,
@@ -19,10 +18,12 @@ class Home extends Component {
       title: "",
       artist: "",
       year: null,
-      condition: null
+      condition: null,
+      records: []
     };
     this.getRecords = this.getRecords.bind(this);
     this.createRecord = this.createRecord.bind(this);
+    this.handleDeletedRows = this.handleDeletedRows.bind(this);
   }
 
   componentDidMount() {
@@ -52,29 +53,42 @@ class Home extends Component {
     };
     const request = {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify(formParams)
     };
 
-    window
-      .fetch(`/api/records/`, request)
-      .then(response => response.json())
-      .then(res => console.log(res));
+    window.fetch(`/api/records/`, request).then(() => this.getRecords());
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
+  handleDeletedRows(rowKeys) {
+    if (rowKeys.length > 0) {
+      rowKeys.map(id => {
+        const request = {
+          method: "DELETE"
+        };
+
+        window
+          .fetch(`/api/records/${id}`, request)
+          .then(() => this.getRecords());
+      });
+    }
+  }
+
   render() {
-    let { records, record, title, artist, year, condition } = this.state;
-    const options = [
+    let { records, title, artist, year, condition } = this.state;
+    const dropdownOptions = [
       { key: "m", text: "Mint", value: "mint" },
       { key: "g", text: "Good", value: "good" },
       { key: "a", text: "Acceptable", value: "acceptable" },
       { key: "b", text: "Bad", value: "bad" }
     ];
+    const selectRow = {
+      mode: "checkbox"
+    };
+    const options = {
+      afterDeleteRow: this.handleDeletedRows
+    };
     return records ? (
       <Container text>
         <Header as="h2" icon textAlign="center" color="red">
@@ -115,7 +129,7 @@ class Home extends Component {
             control={Select}
             name="condition"
             label="Condition"
-            options={options}
+            options={dropdownOptions}
             placeholder="Mint"
             value={condition}
             onChange={this.handleChange}
@@ -125,14 +139,21 @@ class Home extends Component {
         <Divider hidden section />
         <h3>Record Collection</h3>
         {records && records.length ? (
-          <BootstrapTable data={records} striped={true} hover={true}>
+          <BootstrapTable
+            data={records}
+            striped={true}
+            hover={true}
+            deleteRow
+            selectRow={selectRow}
+            options={options}
+          >
             <TableHeaderColumn
               dataField="id"
               isKey={true}
               dataAlign="center"
               dataSort={true}
             >
-              Product ID
+              ID
             </TableHeaderColumn>
             <TableHeaderColumn dataField="title" dataSort={true}>
               Title
