@@ -1,6 +1,6 @@
 # Groove with Greg
 
-This repo contains a basic CRUD app for maintaining a record collection.
+This repo contains a basic CRUD app for maintaining a record collection. You can find the app [deployed to production on Heroku](https://groove-with-greg.herokuapp.com).
 
 Features include:
 
