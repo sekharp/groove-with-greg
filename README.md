@@ -32,4 +32,4 @@ bin/rake db:migrate db:seed start
 
 ## Questions, Suggestions, Comments?
 
-Get in touch by adding an [issue](https://github.com/sekhar/groove-with-greg/issues).
+Get in touch by adding an [issue](https://github.com/sekharp/groove-with-greg/issues).
