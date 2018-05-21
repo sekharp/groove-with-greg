@@ -20,6 +20,8 @@ This repo was forked from the boilerplate repo "List of Ingredients" that has a 
 
 ## Getting Started
 
+To run this app locally, run the following commands in your terminal:
+
 ```shell
 git clone https://github.com/heroku/groove-with-greg.git
 cd groove-with-greg
@@ -27,23 +29,6 @@ bundle
 yarn --cwd client install
 bin/rake db:migrate db:seed start
 ```
-
-Once you're ready to deploy to [Heroku](https://www.heroku.com), run:
-
-```shell
-heroku apps:create
-heroku buildpacks:add heroku/nodejs --index 1
-heroku buildpacks:add heroku/ruby --index 2
-git push heroku master
-heroku run rake db:seed
-heroku open
-```
-
-Or you can click this button to deploy straight to Heroku from this repository:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-Success!
 
 ## Questions, Suggestions, Comments?
 
