@@ -25,6 +25,10 @@ body {
   min-width: 80px;
 }
 
+span {
+  font-size: 16px;
+}
+
 h3 {
   text-align: center;
 }

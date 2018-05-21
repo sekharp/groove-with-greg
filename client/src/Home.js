@@ -7,8 +7,7 @@ import {
   Loader,
   Divider,
   Form,
-  Select,
-  Field
+  Select
 } from "semantic-ui-react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { HorizontalBar } from "react-chartjs-2";
@@ -127,12 +126,15 @@ class Home extends Component {
       <Container text>
         <Header as="h2" icon textAlign="center">
           <Icon name="sound" circular />
-          <Header.Content>Records</Header.Content>
+          <Header.Content>Groove with Greg</Header.Content>
+          <span>
+            <i>A Record Collection Manager</i>
+          </span>
         </Header>
         <Divider hidden section />
         <div className="layout-section">
           <Form onSubmit={this.createRecord}>
-            <h3>Add New Record to Collection</h3>
+            <h3>Add New Record</h3>
             <Form.Field>
               <label>Record Title</label>
               <Form.Input
