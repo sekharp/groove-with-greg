@@ -24,3 +24,7 @@ body {
   width: 80px;
   min-width: 80px;
 }
+
+h3 {
+  text-align: center;
+}

@@ -252,7 +252,9 @@ class Home extends Component {
                 maintainAspectRatio: false,
                 title: {
                   display: true,
-                  text: "Number of Records Per Year"
+                  text: "Number of Records Per Year",
+                  fontSize: 18,
+                  fontColor: "black"
                 },
                 legend: {
                   position: "bottom"
