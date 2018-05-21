@@ -115,7 +115,7 @@ class Home extends Component {
       labels: keys(groupBy(records, "year")),
       datasets: [
         {
-          label: "Albums Per Year",
+          label: "Number of Records",
           backgroundColor: "rgb(255, 99, 132)",
           borderColor: "rgb(255, 99, 132)",
           data: map(values(groupBy(records, "year")), group => group.length)
@@ -244,10 +244,19 @@ class Home extends Component {
               data={barChartData}
               options={{
                 scales: {
-                  xAxes: [{ ticks: { beginAtZero: true, min: 0 } }],
+                  xAxes: [
+                    { ticks: { beginAtZero: true, min: 0, stepSize: 1 } }
+                  ],
                   yAxes: [{ barThickness: 10 }]
                 },
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                title: {
+                  display: true,
+                  text: "Number of Records Per Year"
+                },
+                legend: {
+                  position: "bottom"
+                }
               }}
             />
           ) : (
